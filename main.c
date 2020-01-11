@@ -6,20 +6,20 @@
 #include <math.h>
 #include <conio.h>
 
-/*×ø±êÖáÆ«ÒÆ³£Á¿*/
+/*åæ ‡è½´åç§»å¸¸é‡*/
 const int TRIMX = 30;
 const int TRIMY = 60;
 
-/*×ø±êÖá¿í¸ß*/
+/*åæ ‡è½´å®½é«˜*/
 const int AXIS_WIDTH = 80;
 const int AXIS_HEIGHT = 40;
 const int AXIS_ANGLE_W = 1;
 const int AXIS_ANGLE_H = 2;
 
-/*»æÖÆËõ·Å±ÈÀý*/
+/*ç»˜åˆ¶ç¼©æ”¾æ¯”ä¾‹*/
 const int ZOOM = 7;
 
-/*×ø±ê±äÁ¿*/
+/*åæ ‡å˜é‡*/
 COORD g_coord[65];
 int g_group[65];
 struct CENTER{
@@ -30,15 +30,15 @@ struct CENTER{
 	int color;
 } g_center[10];
 
-/*ÄÜ·ñ¼ÌÐø·Ö×é*/
+/*èƒ½å¦ç»§ç»­åˆ†ç»„*/
 const int MAXTRY = 1000;
 const int DIFF = 1;
 int g_tag;
 
-/*GDIÏà¹Ø±äÁ¿*/
+/*GDIç›¸å…³å˜é‡*/
 HDC g_hdc;
 
-/*º¯ÊýÉùÃ÷*/
+/*å‡½æ•°å£°æ˜Ž*/
 int isRandCoordRepeat(int x,int y,COORD coord[],int n);
 int initRandCoord(COORD coord[], int minN, int maxN);
 void drawAxis();
@@ -56,27 +56,27 @@ int main()
 {
 	int cnt,k,tryCnt=1;
 	char ch;
-	//Çå³ýÆÁÄ»
+	//æ¸…é™¤å±å¹•
 	system("cls");
 	packedClearWind(g_hdc);
-	//³õÊ¼»¯±äÁ¿
+	//åˆå§‹åŒ–å˜é‡
 	g_tag = 1;
 	g_hdc = packedGetDC();
-	//³õÊ¼»¯Ëæ»ú×ø±êÊý×é
+	//åˆå§‹åŒ–éšæœºåæ ‡æ•°ç»„
 	cnt = initRandCoord(g_coord,15,65);
-	//»æÖÆ×ø±êÖá
+	//ç»˜åˆ¶åæ ‡è½´
 	drawAxis();
-	//¸ù¾Ý×ø±êÊý×éÃèµã
+	//æ ¹æ®åæ ‡æ•°ç»„æç‚¹
 	drawDotByCoord(g_coord,cnt);
-	printf("¹²%d¸öµã\n", cnt);
-	//½øÐÐ·Ö×é
-	printf("ÇëÊäÈë×éÊýk(1-10): ");
+	printf("å…±%dä¸ªç‚¹\n", cnt);
+	//è¿›è¡Œåˆ†ç»„
+	printf("è¯·è¾“å…¥ç»„æ•°k(1-10): ");
 	scanf("%d",&k);
 	while(k>10 || k<1)
 	{
 		system("cls");
-		printf("¹²%d¸öµã\n", cnt);
-		printf("ÇëÊäÈë×éÊýk(1-10): ");
+		printf("å…±%dä¸ªç‚¹\n", cnt);
+		printf("è¯·è¾“å…¥ç»„æ•°k(1-10): ");
 		scanf("%d",&k);
 	}
 	system("cls");
@@ -92,9 +92,9 @@ int main()
 		groupCenterDot(g_coord,cnt,g_center,k);
 		drawAxis();
 		tryCnt++;
-		printf("·Ö×é´ÎÊý: %d\n",tryCnt);
+		printf("åˆ†ç»„æ¬¡æ•°: %d\n",tryCnt);
 	}
-	printf("·Ö×é½áÊø, °´ÏÂ»Ø³µ¼ü¿ªÊ¼ÐÂµÄ·Ö×é\n");
+	printf("åˆ†ç»„ç»“æŸ, æŒ‰ä¸‹å›žè½¦é”®å¼€å§‹æ–°çš„åˆ†ç»„\n");
 	while(ch=getch())
 	{
 		if(ch==13) main();
@@ -102,8 +102,8 @@ int main()
 	return 0;
 }
 
-/*³õÊ¼»¯Ëæ»ú×ø±êÊý×é*/
-/*·µ»ØÉú³ÉµÄ×ø±êÊýÁ¿*/
+/*åˆå§‹åŒ–éšæœºåæ ‡æ•°ç»„*/
+/*è¿”å›žç”Ÿæˆçš„åæ ‡æ•°é‡*/
 int initRandCoord(COORD coord[], int minN, int maxN)
 {
 	int x,y;
@@ -131,8 +131,8 @@ int initRandCoord(COORD coord[], int minN, int maxN)
 	return cnt;
 }
 
-/*²éÕÒÖØ¸´×ø±êÊý×é*/
-/*1 - ÖØ¸´, 0 - Î¨Ò»*/
+/*æŸ¥æ‰¾é‡å¤åæ ‡æ•°ç»„*/
+/*1 - é‡å¤, 0 - å”¯ä¸€*/
 int isRandCoordRepeat(int x,int y,COORD coord[],int n)
 {
 	int i;
@@ -146,32 +146,32 @@ int isRandCoordRepeat(int x,int y,COORD coord[],int n)
 	return 0;
 }
 
-/*·â×° - GetDC*/
+/*å°è£… - GetDC*/
 HDC packedGetDC()
 {
 	HDC hdc;
 	TCHAR title[256];
-	//»ñÈ¡¿ØÖÆÌ¨±êÌâ
+	//èŽ·å–æŽ§åˆ¶å°æ ‡é¢˜
 	GetConsoleTitle(title, 256);
-	//¸ù¾Ý¿ØÖÆÌ¨±êÌâ»ñµÃ¾ä±ú´Ó¶ø»ñµÃHDC
+	//æ ¹æ®æŽ§åˆ¶å°æ ‡é¢˜èŽ·å¾—å¥æŸ„ä»Žè€ŒèŽ·å¾—HDC
 	hdc = GetDC(FindWindow(0, title));
 	return hdc;
 }
 
-/*·â×° - »­µã*/
+/*å°è£… - ç”»ç‚¹*/
 void packedDrawDot(int x,int y,int color,HDC hdc)
 {
 	HPEN hPen,hPenOld;
-	//´´½¨»­±Ê
+	//åˆ›å»ºç”»ç¬”
 	hPen = CreatePen(PS_SOLID, 3, color);
-	//Ñ¡Ôñ»­±Ê
+	//é€‰æ‹©ç”»ç¬”
 	hPenOld = (HPEN)SelectObject(hdc, hPen);
-	//»æÖÆ
+	//ç»˜åˆ¶
 	MoveToEx(hdc, TRIMX+x*ZOOM, TRIMY+y*ZOOM, NULL);
 	LineTo(hdc,TRIMX+x*ZOOM, TRIMY+y*ZOOM);
 }
 
-/*·â×° - »®Ïß*/
+/*å°è£… - åˆ’çº¿*/
 void packedDrawLine(int xS,int yS,int xE,int yE,int color,HDC hdc)
 {
 	HPEN hPen,hPenOld;
@@ -181,7 +181,7 @@ void packedDrawLine(int xS,int yS,int xE,int yE,int color,HDC hdc)
 	LineTo(hdc, TRIMX+xE*ZOOM, TRIMY+yE*ZOOM);
 }
 
-/*·â×° - Êä³öÎÄ±¾*/
+/*å°è£… - è¾“å‡ºæ–‡æœ¬*/
 void packedPrintText(int x,int y,char str[],int len,int color,HDC hdc)
 {
 	SetTextColor(hdc,color);
@@ -190,7 +190,7 @@ void packedPrintText(int x,int y,char str[],int len,int color,HDC hdc)
 	TextOut(hdc,TRIMX+x*ZOOM,TRIMX+y*ZOOM,str,len);
 }
 
-/*·â×° - Çå¿ÕÆÁÄ»*/
+/*å°è£… - æ¸…ç©ºå±å¹•*/
 void packedClearWind(HDC hdc)
 {
 	HPEN hPen;
@@ -202,39 +202,39 @@ void packedClearWind(HDC hdc)
 	Rectangle(hdc,0,0,TRIMX+AXIS_WIDTH*ZOOM+20,TRIMY+AXIS_HEIGHT*ZOOM+20);
 }
 
-/*»æÖÆ×ø±êÖá*/
+/*ç»˜åˆ¶åæ ‡è½´*/
 void drawAxis()
 {
 	int color;
 	color = RGB(65,105,225);
-	/*»æÖÆyÖá - ´ÓÏÂµ½ÉÏ*/
+	/*ç»˜åˆ¶yè½´ - ä»Žä¸‹åˆ°ä¸Š*/
 	packedDrawLine(0,AXIS_HEIGHT,0,0,color,g_hdc);
 	packedDrawLine(0,0,0-AXIS_ANGLE_W,AXIS_ANGLE_H,color,g_hdc);
 	packedDrawLine(0,0,AXIS_ANGLE_W,AXIS_ANGLE_H,color,g_hdc);
-	/*»æÖÆxÖá - ´Ó×öµ½ÓÒ*/
+	/*ç»˜åˆ¶xè½´ - ä»Žåšåˆ°å³*/
 	packedDrawLine(0,AXIS_HEIGHT,AXIS_WIDTH,AXIS_HEIGHT,color,g_hdc);
 	packedDrawLine(AXIS_WIDTH,AXIS_HEIGHT,AXIS_WIDTH-AXIS_ANGLE_H,AXIS_HEIGHT-AXIS_ANGLE_W,color,g_hdc);
 	packedDrawLine(AXIS_WIDTH,AXIS_HEIGHT,AXIS_WIDTH-AXIS_ANGLE_H,AXIS_HEIGHT+AXIS_ANGLE_W,color,g_hdc);
 }
 
-/*¸ù¾Ýµã×ø±êÃèµã*/
+/*æ ¹æ®ç‚¹åæ ‡æç‚¹*/
 void drawDotByCoord(COORD coord[], int n)
 {
 	int i;
 	for(i=0;i<n;i++)
 	{
-		//»æÖÆµã×ø±ê
+		//ç»˜åˆ¶ç‚¹åæ ‡
 		packedDrawDot(coord[i].X,coord[i].Y,RGB(255,255,240),g_hdc);
 	}
 }
 
-/*³õÊ¼»¯ÖÐÐÄµã*/
+/*åˆå§‹åŒ–ä¸­å¿ƒç‚¹*/
 void initCenterDot(COORD coord[], int cnt, struct CENTER center[], int k)
 {
 	int i,rndNum,x,y;
 	COORD centerTmp[10];
 	srand((unsigned)time(0));
-	/*ÎÞÖØ¸´³õÊ¼»¯ÖÐÐÄµã*/
+	/*æ— é‡å¤åˆå§‹åŒ–ä¸­å¿ƒç‚¹*/
 	for(i=0;i<cnt;i++)
 	{
 		rndNum = rand()%cnt;
@@ -253,7 +253,7 @@ void initCenterDot(COORD coord[], int cnt, struct CENTER center[], int k)
 			break;
 		}
 	}
-	/*½«ÖÐÐÄµã×ø±ê¸³Öµµ½È«¾Ö±äÁ¿*/
+	/*å°†ä¸­å¿ƒç‚¹åæ ‡èµ‹å€¼åˆ°å…¨å±€å˜é‡*/
 	for(i=0;i<k;i++)
 	{
 		g_center[i].X = centerTmp[i].X;
@@ -265,7 +265,7 @@ void initCenterDot(COORD coord[], int cnt, struct CENTER center[], int k)
 	}
 }
 
-/*¸üÐÂÖÐÐÄµã*/
+/*æ›´æ–°ä¸­å¿ƒç‚¹*/
 void trimCenterDot(COORD coord[], int cnt, struct CENTER center[], int k)
 {
 	int i,j,groupNum,tag=0;
@@ -285,7 +285,7 @@ void trimCenterDot(COORD coord[], int cnt, struct CENTER center[], int k)
 		}
 		avgX/=groupNum;
 		avgY/=groupNum;
-		//Îó²î¼°Î¢µ÷ãÐÖµ
+		//è¯¯å·®åŠå¾®è°ƒé˜ˆå€¼
 		if((int)avgX-center[i].X<=DIFF && (int)avgY-center[i].Y<=DIFF)
 		{
 			center[i].flag = 0;
@@ -303,7 +303,7 @@ void trimCenterDot(COORD coord[], int cnt, struct CENTER center[], int k)
 			center[i].tryCnt++;
 		}
 	}
-	//±éÀúËùÓÐÖÐÐÄµãÊÇ·ñ¿ÉÒÔÎ¢µ÷
+	//éåŽ†æ‰€æœ‰ä¸­å¿ƒç‚¹æ˜¯å¦å¯ä»¥å¾®è°ƒ
 	for(i=0;i<k;i++)
 	{
 		if(center[i].flag)
@@ -318,13 +318,13 @@ void trimCenterDot(COORD coord[], int cnt, struct CENTER center[], int k)
 	}
 }
 
-/*·Ö×éÖÐÐÄµã(µÚn´Î·Ö×é)*/
+/*åˆ†ç»„ä¸­å¿ƒç‚¹(ç¬¬næ¬¡åˆ†ç»„)*/
 void groupCenterDot(COORD coord[], int cnt, struct CENTER center[], int k)
 {
 	char cnum[5]={0};
 	int i,j,minI,len;
 	double distance,minDistance;
-	/*ÉèÖÃ·Ö×éÑÕÉ«*/
+	/*è®¾ç½®åˆ†ç»„é¢œè‰²*/
 	srand((unsigned)time(0));
 	for(i=0;i<k;i++)
 	{
@@ -332,7 +332,7 @@ void groupCenterDot(COORD coord[], int cnt, struct CENTER center[], int k)
 			center[i].color = RGB(rand()%255+1,rand()%255+1,rand()%255+1);
 		}
 	}
-	/*¼ÆËãµ½ÖÐÐÄµã×î¶Ì¾àÀë²¢·Ö×é*/
+	/*è®¡ç®—åˆ°ä¸­å¿ƒç‚¹æœ€çŸ­è·ç¦»å¹¶åˆ†ç»„*/
 	for(i=0;i<cnt;i++)
 	{
 		minDistance=-1;
@@ -355,7 +355,7 @@ void groupCenterDot(COORD coord[], int cnt, struct CENTER center[], int k)
 
 		g_group[i] = minI;
 	}
-	/*»æÖÆËùÓÐµã±àºÅ*/
+	/*ç»˜åˆ¶æ‰€æœ‰ç‚¹ç¼–å·*/
 	for(i=0;i<cnt;i++)
 	{
 		j=g_group[i]+1;
